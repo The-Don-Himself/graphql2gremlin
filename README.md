@@ -57,6 +57,7 @@ Let's get a bit more complex and fetch only 10 friends of a user_id with user_id
     bio
   }
 }
+````
 
 Still not satisfied, well, I actually use this in production for my startup Campus Discounts, a social network where students find and recommend discounts on offer by businesses near campus.
 

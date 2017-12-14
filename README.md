@@ -11,8 +11,9 @@ GraphQL2Gremlin to an attempt create a standard way to traverse a Gremlin interf
 Its ridiculously simple really, all we do is to tie down certain notions in GraphQL to mean something in Gremlin. Let's start with GraphQL arguments. In the GraphQL2Gremlin standard, each level of an argument must STRICTLY be either an edge or a vertex and MUST match the label. Thereafter, each argument level preceeding it MUST be the oppposite. Furthermore, all argument properties that represent traversal steps must begin with an underscore. Lastly, all argument properties that do not represent a traversal step must be a search predicate and thus match GraphQL input type STRING. It's best explained using a practical example : Twitter.
 
 
-Let's say we have vertex with label 'users' and 'tweets' and edges between them called 'tweeted', 'liked' and edges between 'users' called 'followedby', 'following' and finally edges between 'tweets' called 'retweeted'
+Let's say we have vertexes with label 'users' and 'tweets' and edges between them called 'tweeted', 'liked' and edges between 'users' called 'followedby', 'following' and finally edges between 'tweets' called 'retweeted'
 
+![Image](twittergraph.png?raw=true "simple twitter graph")
 
 Let's fetch a users friends for user_id 5 and get the id, username and bio fields
 
@@ -32,7 +33,7 @@ Let's fetch a users friends for user_id 5 and get the id, username and bio field
 }
 ````
 
-Notice users matches vertex label 'users', same to following matches edge label 'following', notice how user_id is a search predicate, meaning it could have between gt(5), or lte(1000) or between(1000, 2000) or any other.
+Notice users matches vertex label 'users', same to argument following matches edge label 'following', also notice how user_id is a search predicate, meaning it could have between gt(5), or lte(1000) or between(1000, 2000) or [any other](http://tinkerpop.apache.org/docs/current/reference/#a-note-on-predicates). Predicates may also depend on the Graph Database in use, I'm currently using [JanusGraph](https://github.com/JanusGraph/janusgraph) which accepts a few other [predicates](http://docs.janusgraph.org/latest/search-predicates.html) as well such as [text search](http://docs.janusgraph.org/latest/search-predicates.html#_text_predicate) and [geo](http://docs.janusgraph.org/latest/search-predicates.html#_geo_predicate).
 
 Let's get a bit more complex and fetch only 10 friends of a user_id with user_id 5, with a last_login date within a day, who've retweeted tweets with the word 'graph' liked by the user (i.e user_id 5), we'll also sort these users by username in decreasing order and get the id, username and bio fields
 

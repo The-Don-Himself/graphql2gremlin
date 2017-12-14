@@ -1,5 +1,7 @@
 # graphql2gremlin
 
+![Image](graphql2gremlin.png?raw=true "graphql2gremlin")
+
 ## The What?
 
 GraphQL2Gremlin to an attempt create a standard way to traverse a Gremlin interfaced Graph database using GraphQL.

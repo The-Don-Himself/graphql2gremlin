@@ -8,7 +8,7 @@ GraphQL2Gremlin to an attempt create a standard way to traverse a Gremlin interf
 
 ## The How?
 
-Its ridiculously simple really, all we do is tie down certain notions in GraphQL to mean something in Gremlin. Let's start with GraphQL arguments. In the GraphQL2Gremlin standard, each level of an argument **should** be either an edge or a vertex and if so **MUST** match the label. Thereafter, each argument level preceding it **MUST** be the opposite. Furthermore, all argument properties that represent traversal steps **MUST** begin with an underscore. Lastly, all argument properties that do not represent a traversal step must be a search predicate and thus match GraphQL input type STRING. It's best explained using a practical example: Twitter.
+Its ridiculously simple really, all we do is tie down certain notions in GraphQL to mean something in Gremlin. Let's start with GraphQL arguments. In the GraphQL2Gremlin standard, each level of an argument **should** be either an edge or a vertex and if so **MUST** match the label. Thereafter, each argument level preceding it **MUST** be the opposite i.e vertex->edge->vertex or edge->vertex->edge. Furthermore, all argument properties that represent traversal steps **MUST** begin with an underscore. Lastly, all argument properties that do not represent a traversal step must be a search predicate and thus match GraphQL input type STRING. It's best explained using a practical example: Twitter.
 
 
 At it's utmost simplest form, Twitter can be graphed as a set of only 2 nodes; users and tweets where the edges signify actions between them. Let's say we have vertexes with label 'users' and 'tweets' and edges between them called 'tweeted', 'liked' and edges between 'users' called 'followedby', 'following' and finally edges between 'tweets' called 'retweeted'
@@ -61,6 +61,9 @@ Let's get a bit more complex and fetch only 10 friends of a user_id with user_id
   }
 }
 ````
+
+I actually created a [Gremlin-OGM](https://github.com/The-Don-Himself/gremlin-ogm) PHP library that comes preconfigured with a sample Twitter App that you can use graph your own Twitter handle with the above schema by just typing one command (check out the tests subheading at the bottom of the ReadMe).
+
 
 Still not satisfied, well, I actually use this in production for my startup Campus Discounts, a social network where students find and recommend discounts on offer by businesses near campus.
 
